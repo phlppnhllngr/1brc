@@ -15,6 +15,8 @@
 #  limitations under the License.
 #
 
-
-#java --class-path target/average-1.0.0-SNAPSHOT.jar dev.morling.onebrc.CreateMeasurements $1
-java src/main/java/dev/morling/onebrc/CreateMeasurements.java $1
+JAVA_OPTS="--source=21 --enable-preview -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8"
+if [[ "$JFR" = "true" ]]; then
+    JAVA_OPTS="$JAVA_OPTS -XX:StartFlightRecording:filename=flight-record.jfr,dumponexit=true,settings=profile"
+fi
+java "$JAVA_OPTS" src/main/java/phlppnhllngr/onebrc/CalculateAverage.java $1
